@@ -67,3 +67,30 @@ const addEventOnElements = function (elements, eventType, callback) {
  *
  * add all music in playlist, from 'musicData'
  */
+
+const playlist = document.querySelector('[data-music-list]')
+
+for (let i = 0, len = musicData.length; i < len; i++) {
+  playlist.innerHTML += `
+  <li>
+    <button class="music-item ${
+      i === 0 ? 'playing' : ''
+    }" data-playlist-toggler data-playlist-item="${i}">
+      <img src="${musicData[i].posterUrl}" width="800" height="800" alt="${
+    musicData[i].title
+  } Album Poster"
+        class="img-cover">
+      <div class="item-icon">
+        <span class="material-symbols-rounded">equalizer</span>
+      </div>
+    </button>
+  </li>
+  `
+}
+
+/**
+ * PLAYLIST MODAL SIDEBAR TOGGLE
+ *
+ * show 'playlist' modal sidebar when click on playlist button in top app bar
+ * and hide when click on overlay or any playlist-item
+ */
