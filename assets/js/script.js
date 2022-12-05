@@ -219,3 +219,27 @@ const updateRunningTime = function () {
   updateRangeFill()
   isMusicEnd()
 }
+
+/**
+ * RANGE FILL WIDTH
+ *
+ * change 'rangeFill' width, while changing range value
+ */
+
+const ranges = document.querySelectorAll('[data-range]')
+const rangeFill = document.querySelector('[data-range-fill]')
+
+const updateRangeFill = function () {
+  let element = this || ranges[0]
+
+  const rangeValue = (element.value / element.max) * 100
+  element.nextElementSibling.style.width = `${rangeValue}%`
+}
+
+addEventOnElements(ranges, 'input', updateRangeFill)
+
+/**
+ * SEEK MUSIC
+ *
+ * seek music while changing player seek range
+ */
