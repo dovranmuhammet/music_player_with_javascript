@@ -135,3 +135,33 @@ addEventOnElements(playlistItems, 'click', function () {
  *
  * change all visual information on player, based on current music
  */
+
+const playerBanner = document.querySelector('[data-player-banner]')
+const playerTitle = document.querySelector('[data-title]')
+const playerAlbum = document.querySelector('[data-album]')
+const playerYear = document.querySelector('[data-year]')
+const playerArtist = document.querySelector('[data-artist]')
+
+const audioSource = new Audio(musicData[currentMusic].musicPath)
+
+const changePlayerInfo = function () {
+  playerBanner.src = musicData[currentMusic].posterUrl
+  playerBanner.setAttribute(
+    'alt',
+    `${musicData[currentMusic].title} Album Poster`
+  )
+  document.body.style.backgroundImage = `url(${musicData[currentMusic].backgroundImage})`
+  playerTitle.textContent = musicData[currentMusic].title
+  playerAlbum.textContent = musicData[currentMusic].album
+  playerYear.textContent = musicData[currentMusic].year
+  playerArtist.textContent = musicData[currentMusic].artist
+
+  audioSource.src = musicData[currentMusic].musicPath
+
+  audioSource.addEventListener('loadeddata', updateDuration)
+  playMusic()
+}
+
+addEventOnElements(playlistItems, 'click', changePlayerInfo)
+
+/** update player duration */
