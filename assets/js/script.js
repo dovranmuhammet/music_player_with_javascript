@@ -113,3 +113,25 @@ addEventOnElements(playlistTogglers, 'click', togglePlaylist)
  * remove active state from last time played music
  * and add active state in clicked music
  */
+
+const playlistItems = document.querySelectorAll('[data-playlist-item]')
+
+let currentMusic = 0
+let lastPlayedMusic = 0
+
+const changePlaylistItem = function () {
+  playlistItems[lastPlayedMusic].classList.remove('playing')
+  playlistItems[currentMusic].classList.add('playing')
+}
+
+addEventOnElements(playlistItems, 'click', function () {
+  lastPlayedMusic = currentMusic
+  currentMusic = Number(this.dataset.playlistItem)
+  changePlaylistItem()
+})
+
+/**
+ * PLAYER
+ *
+ * change all visual information on player, based on current music
+ */
