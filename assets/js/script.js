@@ -165,7 +165,6 @@ const changePlayerInfo = function () {
 addEventOnElements(playlistItems, 'click', changePlayerInfo)
 
 /** update player duration */
-
 const playerDuration = document.querySelector('[data-duration]')
 const playerSeekRange = document.querySelector('[data-seek]')
 
@@ -285,3 +284,101 @@ const skipNext = function () {
 }
 
 playerSkipNextBtn.addEventListener('click', skipNext)
+
+/**
+ * SKIP TO PREVIOUS MUSIC
+ */
+
+const playerSkipPrevBtn = document.querySelector('[data-skip-prev]')
+
+const skipPrev = function () {
+  lastPlayedMusic = currentMusic
+
+  if (isShuffled) {
+    shuffleMusic()
+  } else {
+    currentMusic <= 0 ? (currentMusic = musicData.length - 1) : currentMusic--
+  }
+
+  changePlayerInfo()
+  changePlaylistItem()
+}
+
+playerSkipPrevBtn.addEventListener('click', skipPrev)
+
+/**
+ * SHUFFLE MUSIC
+ */
+
+/** get random number for shuffle */
+const getRandomMusic = () => Math.floor(Math.random() * musicData.length)
+
+const shuffleMusic = () => (currentMusic = getRandomMusic())
+
+const playerShuffleBtn = document.querySelector('[data-shuffle]')
+let isShuffled = false
+
+const shuffle = function () {
+  playerShuffleBtn.classList.toggle('active')
+
+  isShuffled = isShuffled ? false : true
+}
+
+playerShuffleBtn.addEventListener('click', shuffle)
+
+/**
+ * REPEAT MUSIC
+ */
+
+const playerRepeatBtn = document.querySelector('[data-repeat]')
+
+const repeat = function () {
+  if (!audioSource.loop) {
+    audioSource.loop = true
+    this.classList.add('active')
+  } else {
+    audioSource.loop = false
+    this.classList.remove('active')
+  }
+}
+
+playerRepeatBtn.addEventListener('click', repeat)
+
+/**
+ * MUSIC VOLUME
+ *
+ * increase or decrease music volume when change the volume range
+ */
+
+const playerVolumeRange = document.querySelector('[data-volume]')
+const playerVolumeBtn = document.querySelector('[data-volume-btn]')
+
+const changeVolume = function () {
+  audioSource.volume = playerVolumeRange.value
+  audioSource.muted = false
+
+  if (audioSource.volume <= 0.1) {
+    playerVolumeBtn.children[0].textContent = 'volume_mute'
+  } else if (audioSource.volume <= 0.5) {
+    playerVolumeBtn.children[0].textContent = 'volume_down'
+  } else {
+    playerVolumeBtn.children[0].textContent = 'volume_up'
+  }
+}
+
+playerVolumeRange.addEventListener('input', changeVolume)
+
+/**
+ * MUTE MUSIC
+ */
+
+const muteVolume = function () {
+  if (!audioSource.muted) {
+    audioSource.muted = true
+    playerVolumeBtn.children[0].textContent = 'volume_off'
+  } else {
+    changeVolume()
+  }
+}
+
+playerVolumeBtn.addEventListener('click', muteVolume)
