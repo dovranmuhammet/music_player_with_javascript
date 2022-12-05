@@ -243,3 +243,14 @@ addEventOnElements(ranges, 'input', updateRangeFill)
  *
  * seek music while changing player seek range
  */
+
+const seek = function () {
+  audioSource.currentTime = playerSeekRange.value
+  playerRunningTime.textContent = getTimecode(playerSeekRange.value)
+}
+
+playerSeekRange.addEventListener('input', seek)
+
+/**
+ * END MUSIC
+ */
