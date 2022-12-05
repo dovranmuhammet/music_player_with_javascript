@@ -254,3 +254,34 @@ playerSeekRange.addEventListener('input', seek)
 /**
  * END MUSIC
  */
+
+const isMusicEnd = function () {
+  if (audioSource.ended) {
+    playBtn.classList.remove('active')
+    audioSource.currentTime = 0
+    playerSeekRange.value = audioSource.currentTime
+    playerRunningTime.textContent = getTimecode(audioSource.currentTime)
+    updateRangeFill()
+  }
+}
+
+/**
+ * SKIP TO NEXT MUSIC
+ */
+
+const playerSkipNextBtn = document.querySelector('[data-skip-next]')
+
+const skipNext = function () {
+  lastPlayedMusic = currentMusic
+
+  if (isShuffled) {
+    shuffleMusic()
+  } else {
+    currentMusic >= musicData.length - 1 ? (currentMusic = 0) : currentMusic++
+  }
+
+  changePlayerInfo()
+  changePlaylistItem()
+}
+
+playerSkipNextBtn.addEventListener('click', skipNext)
