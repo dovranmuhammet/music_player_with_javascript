@@ -165,3 +165,27 @@ const changePlayerInfo = function () {
 addEventOnElements(playlistItems, 'click', changePlayerInfo)
 
 /** update player duration */
+
+const playerDuration = document.querySelector('[data-duration]')
+const playerSeekRange = document.querySelector('[data-seek]')
+
+/** pass seconds and get timcode formate */
+const getTimecode = function (duration) {
+  const minutes = Math.floor(duration / 60)
+  const seconds = Math.ceil(duration - minutes * 60)
+  const timecode = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+  return timecode
+}
+
+const updateDuration = function () {
+  playerSeekRange.max = Math.ceil(audioSource.duration)
+  playerDuration.textContent = getTimecode(Number(playerSeekRange.max))
+}
+
+audioSource.addEventListener('loadeddata', updateDuration)
+
+/**
+ * PLAY MUSIC
+ *
+ * play and pause music when click on play button
+ */
