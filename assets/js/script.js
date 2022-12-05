@@ -94,3 +94,22 @@ for (let i = 0, len = musicData.length; i < len; i++) {
  * show 'playlist' modal sidebar when click on playlist button in top app bar
  * and hide when click on overlay or any playlist-item
  */
+
+const playlistSideModal = document.querySelector('[data-playlist]')
+const playlistTogglers = document.querySelectorAll('[data-playlist-toggler]')
+const overlay = document.querySelector('[data-overlay]')
+
+const togglePlaylist = function () {
+  playlistSideModal.classList.toggle('active')
+  overlay.classList.toggle('active')
+  document.body.classList.toggle('modalActive')
+}
+
+addEventOnElements(playlistTogglers, 'click', togglePlaylist)
+
+/**
+ * PLAYLIST ITEM
+ *
+ * remove active state from last time played music
+ * and add active state in clicked music
+ */
