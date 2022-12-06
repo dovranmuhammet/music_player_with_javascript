@@ -612,3 +612,22 @@ body:hover::-webkit-scrollbar-thumb {
     justify-content: flex-start;
     margin-block-end: 8px;
   }
+
+  /**
+ * responsive for large than 1200px screen
+ */
+
+@media (min-width: 1200px) {
+
+  /**
+   * PLAYLIST
+   */
+
+  .playlist {
+    padding: 32px;
+    width: 220px;
+  }
+
+  .music-list { gap: 28px; }
+
+}
