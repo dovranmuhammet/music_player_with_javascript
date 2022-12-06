@@ -490,3 +490,75 @@ body:hover::-webkit-scrollbar-thumb {
 /*-----------------------------------*\
   #MEDIA QUERIES
 \*-----------------------------------*/
+
+/**
+ * responsive for large than 575px screen
+ */
+
+@media (min-width: 575px) {
+  /**
+   * RESET
+   */
+
+  body {
+    background-size: 100%;
+  }
+
+  /**
+   * PLAYER
+   */
+
+  .player {
+    justify-content: center;
+  }
+
+  .player .container {
+    max-width: 540px;
+  }
+}
+
+/**
+ * responsive for large than 992px screen
+ */
+
+@media (min-width: 992px) {
+
+  /**
+   * CUSTOM PROPERTY
+   */
+
+  :root {
+
+    /**
+     * typography
+     */
+
+    --headline-sm: 4.2rem;
+    --label-lg: 2.2rem;
+
+  }
+
+
+/**
+   * RESET
+   */
+
+  body {
+    background-size: 40% 100%;
+    background-position: left center;
+  }
+
+  article { display: flex; }
+
+
+
+  /**
+   * REUSED STYLE
+   */
+
+  .btn-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .btn-icon .material-symbols-rounded { font-size: 2.8rem; }
